@@ -1,4 +1,4 @@
-## Customizable material switch for react-native
+## Customizable material button for react-native
 <p align="center">
     <img src ="http://s28.postimg.org/3zcyab5j1/out.gif" />
 </p>
