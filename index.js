@@ -30,6 +30,8 @@ var MaterialButton = React.createClass({
   },
 
   getInitialState() {
+    this.currentLevel = this.props.shadowLevel;
+
     return {
       radius: new Animated.Value(0),
       opacity: new Animated.Value(1),
@@ -38,12 +40,9 @@ var MaterialButton = React.createClass({
       shadowOffset: {height: this.props.shadowLevel, width: 0},
       width: 0,
       height: 0,
-      top: 0,
-      left: 0,
       fromTop: 0,
       fromLeft: 0,
     };
-    this.currentLevel = this.props.shadowLevel;
   },
 
   currentLevel: 0,
@@ -70,10 +69,12 @@ var MaterialButton = React.createClass({
         this.hideRipple();
       },
       onPanResponderGrant: (evt, gestureState) => {
+        var x = evt.nativeEvent.locationX;
+        var y = evt.nativeEvent.locationY;
         this.isTouching = true;
         this.shouldHide = false;
         this.startRipple();
-        this.rippleAnimation(gestureState.x0, gestureState.y0);
+        this.rippleAnimation(x, y);
         this.liftUp();
 
         this.props.onClick();
@@ -116,15 +117,14 @@ var MaterialButton = React.createClass({
     this.liftInterval = setInterval(() => {
       this.currentLevel += step;
       this.setState({shadowOffset: {height: this.currentLevel, width: 0}});
-      if ((step > 0 && this.currentLevel >= h) ||
-      (step < 0 && this.currentLevel <= h)) clearInterval(this.liftInterval);
+      if ((step > 0 && this.currentLevel >= h) || (step < 0 && this.currentLevel <= h)) clearInterval(this.liftInterval);
     }, 100);
   },
 
   rippleAnimation(x,y) {
     this.setState({
-      fromTop: y-this.state.top,
-      fromLeft: x-this.state.left
+      fromTop: y,
+      fromLeft: x
     });
     Animated.sequence([
       Animated.timing(this.state.radius, {
@@ -139,7 +139,7 @@ var MaterialButton = React.createClass({
       this.shouldHide = true;
       clearInterval(this.rippleInterval);
       this.hideRipple();
-    }, this.animationTime);
+    }, this.props.animationTime);
   },
 
   hideRipple() {
@@ -160,12 +160,12 @@ var MaterialButton = React.createClass({
           }),
         ])
       ]).start();
-
     }
   },
 
   onLayout(e) {
     var { x, y, width, height } = e.nativeEvent.layout;
+    console.log(x, y, width, height);
     this.setState({
       top: y,
       left: x,

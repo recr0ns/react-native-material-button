@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-button",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Customizable material style button",
   "main": "index.js",
   "scripts": {
