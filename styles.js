@@ -1,6 +1,6 @@
-var React = require('react-native');
+import { StyleSheet } from 'react-native';
 
-module.exports = React.StyleSheet.create({
+const styles = StyleSheet.create({
   rippleContainer: {
     backgroundColor: 'transparent',
     overflow: 'hidden',
@@ -21,3 +21,5 @@ module.exports = React.StyleSheet.create({
     overflow: 'visible',
   }
 });
+
+export default styles;

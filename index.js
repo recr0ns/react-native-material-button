@@ -1,14 +1,8 @@
-'use strict';
+import React from 'react';
+import { View, Animated, PanResponder } from 'react-native';
+import styles from './styles';
 
-var React = require('react-native');
-var {
-  View,
-  Animated,
-  PanResponder
-} = React;
-var styles = require('./styles');
-
-var MaterialButton = React.createClass({
+const MaterialButton = React.createClass({
   getDefaultProps() {
     return {
       withRipple: true,
@@ -219,4 +213,4 @@ var MaterialButton = React.createClass({
   }
 });
 
-module.exports = MaterialButton;
+export default MaterialButton;
