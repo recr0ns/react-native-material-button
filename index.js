@@ -165,7 +165,6 @@ var MaterialButton = React.createClass({
 
   onLayout(e) {
     var { x, y, width, height } = e.nativeEvent.layout;
-    console.log(x, y, width, height);
     this.setState({
       top: y,
       left: x,
