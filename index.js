@@ -77,6 +77,12 @@ const MaterialButton = React.createClass({
     });
   },
 
+  componentWillUnmount() {
+    if (this.liftInterval) {
+      clearInterval(this.liftInterval);
+    }
+  },
+
   liftUp() {
     Animated.parallel([
       Animated.timing(this.state.shadowRadius, {
